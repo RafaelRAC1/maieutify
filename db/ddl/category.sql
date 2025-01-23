@@ -5,3 +5,4 @@ CREATE TABLE category
 )
 
 -- added
+-- CORRECT

@@ -15,3 +15,4 @@ CREATE TABLE profile_comment
 )
 
 -- ADDED
+-- CORRECT2

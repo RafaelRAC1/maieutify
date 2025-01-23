@@ -11,3 +11,4 @@ CREATE TABLE alternative
 )   
 
 -- ADDED
+-- CORRECT

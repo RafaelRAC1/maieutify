@@ -11,3 +11,4 @@ CREATE TABLE app_user
 )
 
 -- added
+-- CORRECT2
