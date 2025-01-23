@@ -6,7 +6,7 @@ INSERT INTO app_user VALUES ('somebody', '444', 'link', 'LilSom123', GETUTCDATE(
 
 
 -- add profile comment
-INSERT INTO profile_comment VALUES (1, 2, 'Hey, Rafael, I am new here! I ve enjoy all of your quizzes so far!', 'N', GETUTCDATE())
+INSERT INTO profile_comment VALUES (1, 2, 'Hey, Rafael, I am new here! I ve enjoyed all of your quizzes so far!', 'N', GETUTCDATE())
 
 -- add categories for quizzes
 INSERT INTO category VALUES ('history'), ('games'), ('chemistry'), ('general')
