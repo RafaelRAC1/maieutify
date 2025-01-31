@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rafael.maieutify.repository.AppUserRepository;;
+import com.rafael.maieutify.services.AppUserService;;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/users")
 public class AppUserController {
 
     @Autowired
-    private AppUserRepository appUserRepository;
+    private AppUserService appUserService;
 
-    @PostMapping("/users")
+    @PostMapping("/add")
     public AppUser createUser(@RequestBody AppUser appUser) {
-        return appUserRepository.save(appUser);
+        return appUserService.createUser(appUser);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<AppUser> getUserById(@PathVariable(value = "id") long userId) throws Exception{
-        AppUser appUser = appUserRepository.findById(userId).orElseThrow(() -> new Exception("Dis is a lil bad"));
+        AppUser appUser = appUserService.getUserById(userId);
         return ResponseEntity.ok().body(appUser);
     }
 }
