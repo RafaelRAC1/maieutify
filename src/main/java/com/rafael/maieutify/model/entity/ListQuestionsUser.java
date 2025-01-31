@@ -1,10 +1,12 @@
 package com.rafael.maieutify.model.entity;
 
 import java.sql.Time;
+import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +38,8 @@ public class ListQuestionsUser {
     @Column(name = "time_taken", nullable = true)
     private Time timeTaken;
 
+    @Getter
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser appUser;
@@ -46,8 +51,8 @@ public class ListQuestionsUser {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ListQuestions listQuestions;
 
-    /*@Getter
+    @Getter
     @Setter
-    @OneToOne(mappedBy = "list_questions__user")
-    private UserAnswer userAnswer;*/
+    @OneToMany(mappedBy = "listQuestionsUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserAnswer> userAnswer;
 }

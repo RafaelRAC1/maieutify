@@ -44,11 +44,15 @@ public class ProfileComment {
     @Column(name = "last_updated")
     private Date lastUpdated;
 
+    @Getter
+    @Setter
     @OneToOne
     @JoinColumn(name = "profile_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private AppUser profile;
 
+    @Getter
+    @Setter
     @OneToOne
     @JoinColumn(name = "commenter_id")
     private AppUser commenter;

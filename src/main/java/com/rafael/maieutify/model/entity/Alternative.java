@@ -3,6 +3,7 @@ package com.rafael.maieutify.model.entity;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,9 +48,8 @@ public class Alternative {
 
     @Getter
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "question_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Question question;
 
     @Getter

@@ -39,12 +39,12 @@ public class ListQuestions {
     @Getter
     @Setter
     @Column(name = "last_updated", nullable=false)
-    private Date lastUpdateDated;
+    private Date lastUpdated;
 
     @Getter
     @Setter
     @Column(name = "difficulty", nullable=false)
-    private float difficulty;
+    private Float difficulty;
 
     @Getter
     @Setter
@@ -53,7 +53,7 @@ public class ListQuestions {
 
     @Getter
     @Setter
-    @Column(name = "list_description", nullable=false)
+    @Column(name = "list_description", columnDefinition = "TEXT", nullable=false)
     private String listDescription;
 
     @Getter

@@ -1,8 +1,11 @@
 package com.rafael.maieutify.model.entity;
 
+import java.util.List;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -51,11 +55,10 @@ public class Question {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ListQuestions listQuestions;
 
-    /*@Getter
+    @Getter
     @Setter
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "abbdr_id", nullable = true)
-    private List<Alternative> alternative;*/
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Alternative> alternative;
 
     @Getter
     @Setter

@@ -5,10 +5,12 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -30,7 +32,7 @@ public class UserAnswer {
 
     @Getter
     @Setter
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "list_questions__user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ListQuestionsUser listQuestionsUser;
@@ -43,7 +45,6 @@ public class UserAnswer {
 
     @Getter
     @Setter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "alternative_id", nullable = false)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Alternative alternative;
 }
