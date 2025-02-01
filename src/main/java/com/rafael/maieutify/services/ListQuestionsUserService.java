@@ -14,4 +14,8 @@ public class ListQuestionsUserService {
     public ListQuestionsUser createListQuestionsUser(ListQuestionsUser listQuestionsUser) {
         return listQuestionsUserRepository.save(listQuestionsUser);
     }
+
+    public ListQuestionsUser getListQuestionUserById(Long id){
+        return this.listQuestionsUserRepository.findById(id).orElse(null);
+    }
 }
