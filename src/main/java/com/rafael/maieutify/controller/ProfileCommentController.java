@@ -27,7 +27,7 @@ public class ProfileCommentController {
     public ResponseEntity<Object> createProfileComment(@PathVariable(value = "profile_id") Long profileId, @PathVariable(value = "user_id") Long userId, @RequestBody ProfileComment profileComment){
         AppUser profile = appUserService.getUserById(profileId);
         AppUser commenter = appUserService.getUserById(userId);
-        if(profile == null && commenter == null) {
+        if(profile == null || commenter == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }   
         profileComment.setProfile(profile);
