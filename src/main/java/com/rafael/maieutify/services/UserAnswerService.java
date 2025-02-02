@@ -18,4 +18,8 @@ public class UserAnswerService {
     public UserAnswer getUserAnswerById(Long id) {
         return this.userAnswerRepository.findById(id).orElse(null);
     }
+
+    public Iterable<UserAnswer> createUserAnswers(Iterable<UserAnswer> userAnswers){
+        return this.userAnswerRepository.saveAll(userAnswers);
+    }
 }
