@@ -48,4 +48,25 @@ public class UserAnswerController {
         this.userAnswerService.createUserAnswer(userAnswer);
         return new ResponseEntity<>("User answer registered successfully", HttpStatus.CREATED);
     }
+
+    @PostMapping("/addAll/list-user/{list_user_id}")
+    public ResponseEntity<Object> createUserAnswers(@PathVariable(value = "list_user_id") Long listUserId,
+            @RequestBody Iterable<UserAnswer> userAnswers) {
+        ListQuestionsUser listQuestionsUser = this.listQuestionsUserService.getListQuestionUserById(listUserId);
+        if (listQuestionsUser == null) {
+            return new ResponseEntity<>("User answer was not created", HttpStatus.NOT_FOUND);
+        }
+        for(UserAnswer userAnswer : userAnswers) {
+            Question question = this.questionService.getQuestionById(userAnswer.getQuestion().getId());
+            Alternative alternative = this.alternativeService.getAlternativeById(userAnswer.getAlternative().getId());
+            if(question == null || alternative == null) {
+                return new ResponseEntity<>("User answer was not created", HttpStatus.NOT_FOUND);
+            }
+            userAnswer.setAlternative(alternative);
+            userAnswer.setQuestion(question);
+            userAnswer.setListQuestionsUser(listQuestionsUser);
+        }
+        this.userAnswerService.createUserAnswers(userAnswers);
+        return new ResponseEntity<>("User answers registered successfully", HttpStatus.CREATED);
+    }
 }
