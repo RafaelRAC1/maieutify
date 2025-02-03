@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rafael.maieutify.model.entity.Alternative;
 import com.rafael.maieutify.model.entity.Question;
-import com.rafael.maieutify.services.AlternativeService;
-import com.rafael.maieutify.services.QuestionService;
+import com.rafael.maieutify.service.AlternativeService;
+import com.rafael.maieutify.service.QuestionService;
 
 @RestController
 @RequestMapping("alternative")
