@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rafael.maieutify.model.entity.AppUser;
 import com.rafael.maieutify.model.entity.ProfileComment;
-import com.rafael.maieutify.services.AppUserService;
-import com.rafael.maieutify.services.ProfileCommentService;
+import com.rafael.maieutify.service.AppUserService;
+import com.rafael.maieutify.service.ProfileCommentService;
 
 @RestController
 @RequestMapping("/profile-comment")

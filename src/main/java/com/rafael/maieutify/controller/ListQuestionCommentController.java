@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rafael.maieutify.model.entity.AppUser;
 import com.rafael.maieutify.model.entity.ListQuestionComment;
 import com.rafael.maieutify.model.entity.ListQuestions;
-import com.rafael.maieutify.services.AppUserService;
-import com.rafael.maieutify.services.ListQuestionCommentService;
-import com.rafael.maieutify.services.ListQuestionsService;
+import com.rafael.maieutify.service.AppUserService;
+import com.rafael.maieutify.service.ListQuestionCommentService;
+import com.rafael.maieutify.service.ListQuestionsService;
 
 @RestController
 @RequestMapping("/list-comment")

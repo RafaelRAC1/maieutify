@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rafael.maieutify.model.entity.ListQuestions;
 import com.rafael.maieutify.model.entity.Question;
-import com.rafael.maieutify.services.ListQuestionsService;
-import com.rafael.maieutify.services.QuestionService;
+import com.rafael.maieutify.service.ListQuestionsService;
+import com.rafael.maieutify.service.QuestionService;
 
 @RestController
 @RequestMapping("question")

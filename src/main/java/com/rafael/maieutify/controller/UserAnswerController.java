@@ -13,10 +13,10 @@ import com.rafael.maieutify.model.entity.Alternative;
 import com.rafael.maieutify.model.entity.ListQuestionsUser;
 import com.rafael.maieutify.model.entity.Question;
 import com.rafael.maieutify.model.entity.UserAnswer;
-import com.rafael.maieutify.services.AlternativeService;
-import com.rafael.maieutify.services.ListQuestionsUserService;
-import com.rafael.maieutify.services.QuestionService;
-import com.rafael.maieutify.services.UserAnswerService;
+import com.rafael.maieutify.service.AlternativeService;
+import com.rafael.maieutify.service.ListQuestionsUserService;
+import com.rafael.maieutify.service.QuestionService;
+import com.rafael.maieutify.service.UserAnswerService;
 
 @RestController
 @RequestMapping("/user-answer")

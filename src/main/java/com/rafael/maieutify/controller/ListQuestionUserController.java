@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rafael.maieutify.model.entity.AppUser;
 import com.rafael.maieutify.model.entity.ListQuestions;
 import com.rafael.maieutify.model.entity.ListQuestionsUser;
-import com.rafael.maieutify.services.AlternativeService;
-import com.rafael.maieutify.services.AppUserService;
-import com.rafael.maieutify.services.ListQuestionsService;
-import com.rafael.maieutify.services.ListQuestionsUserService;
-import com.rafael.maieutify.services.QuestionService;
+import com.rafael.maieutify.service.AlternativeService;
+import com.rafael.maieutify.service.AppUserService;
+import com.rafael.maieutify.service.ListQuestionsService;
+import com.rafael.maieutify.service.ListQuestionsUserService;
+import com.rafael.maieutify.service.QuestionService;
 
 @RestController
 @RequestMapping("/list-user")

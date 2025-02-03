@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rafael.maieutify.model.entity.Category;
-import com.rafael.maieutify.services.CategoryService;
+import com.rafael.maieutify.service.CategoryService;
 
 @RestController
 @RequestMapping("category")
