@@ -2,6 +2,10 @@ package com.rafael.maieutify.model.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,4 +57,14 @@ public class AppUser {
     @Setter 
     @Column(name = "bio", nullable = true)
     private String bio;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProfileComment> profileCommentsProfile;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "commenter", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProfileComment> profileCommentsCommenter;
 }
