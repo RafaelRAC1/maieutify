@@ -2,6 +2,7 @@ package com.rafael.maieutify.controller;
 
 import com.rafael.maieutify.mapper.AppUserMapper;
 import com.rafael.maieutify.mapper.dto.user.AppUserDTO;
+import com.rafael.maieutify.mapper.dto.user.AppUserWithCommentsDTO;
 import com.rafael.maieutify.model.entity.AppUser;
 import com.rafael.maieutify.service.AppUserService;
 
@@ -35,5 +36,11 @@ public class AppUserController {
         AppUser appUser = appUserService.getUserById(userId);
         AppUserDTO appUserDTO = this.appUserMapper.appUserToAppUserDTO(appUser);
         return new ResponseEntity<>(appUserDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("get-with-comments/{id}")
+    public ResponseEntity<AppUserDTO> getUserWithCommentsById(@PathVariable(value = "id") Long id){
+        AppUserWithCommentsDTO appUserWithCommentsDTO = this.appUserMapper.appUserToAppUserWithCommentsDTO(this.appUserService.getUserById(id));
+        return new ResponseEntity<>(appUserWithCommentsDTO, HttpStatus.OK);
     }
 }
