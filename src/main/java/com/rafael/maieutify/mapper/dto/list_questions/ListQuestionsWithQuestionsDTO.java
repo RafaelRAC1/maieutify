@@ -9,6 +9,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ListQuestionsWithQuestionsDTO extends ListQuestionsDTO{
+public class ListQuestionsWithQuestionsDTO extends ListQuestionsDetailedDTO{
     private List<QuestionDTO> questions;
 }
