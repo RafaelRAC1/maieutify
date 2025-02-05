@@ -1,14 +1,20 @@
 package com.rafael.maieutify.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rafael.maieutify.mapper.UserAnswerMapper;
+import com.rafael.maieutify.mapper.dto.user_answer.UserAnswerDTO;
 import com.rafael.maieutify.model.entity.Alternative;
 import com.rafael.maieutify.model.entity.ListQuestionsUser;
 import com.rafael.maieutify.model.entity.Question;
@@ -33,6 +39,9 @@ public class UserAnswerController {
     @Autowired
     private AlternativeService alternativeService;
 
+    @Autowired
+    private UserAnswerMapper userAnswerMapper;
+
     @PostMapping("/add/list-user/{list_user_id}")
     public ResponseEntity<Object> createUserAnswer(@PathVariable(value = "list_user_id") Long listUserId,
             @RequestBody UserAnswer userAnswer) {
@@ -56,10 +65,10 @@ public class UserAnswerController {
         if (listQuestionsUser == null) {
             return new ResponseEntity<>("User answer was not created", HttpStatus.NOT_FOUND);
         }
-        for(UserAnswer userAnswer : userAnswers) {
+        for (UserAnswer userAnswer : userAnswers) {
             Question question = this.questionService.getQuestionById(userAnswer.getQuestion().getId());
             Alternative alternative = this.alternativeService.getAlternativeById(userAnswer.getAlternative().getId());
-            if(question == null || alternative == null) {
+            if (question == null || alternative == null) {
                 return new ResponseEntity<>("User answer was not created", HttpStatus.NOT_FOUND);
             }
             userAnswer.setAlternative(alternative);
@@ -68,5 +77,15 @@ public class UserAnswerController {
         }
         this.userAnswerService.createUserAnswers(userAnswers);
         return new ResponseEntity<>("User answers registered successfully", HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get/list-question-user/{list_question__user}")
+    public ResponseEntity<List<UserAnswerDTO>> getUserAnswersByListQuestionsUserId(
+            @PathVariable(value = "list_question__user") Long listQuestionsUserId) {
+        List<UserAnswer> userAnswers = this.userAnswerService
+                .getUserAnswersByListQuestionsUserId(
+                        listQuestionsUserService.getListQuestionUserById(listQuestionsUserId));
+        List<UserAnswerDTO> userAnswersDTO = userAnswers.stream().map(this.userAnswerMapper::userAnswerToUserAnswerDTO).collect(Collectors.toList());
+        return new ResponseEntity<>(userAnswersDTO, HttpStatus.OK);
     }
 }

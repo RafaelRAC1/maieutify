@@ -1,14 +1,21 @@
 package com.rafael.maieutify.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rafael.maieutify.mapper.QuestionMapper;
+import com.rafael.maieutify.mapper.dto.question.QuestionDTO;
+import com.rafael.maieutify.mapper.dto.question.QuestionDetailedDTO;
 import com.rafael.maieutify.model.entity.ListQuestions;
 import com.rafael.maieutify.model.entity.Question;
 import com.rafael.maieutify.service.ListQuestionsService;
@@ -22,6 +29,9 @@ public class QuestionController {
 
     @Autowired
     private ListQuestionsService listQuestionsService;
+
+    @Autowired
+    private QuestionMapper questionMapper;
 
     @PostMapping("/add/{list_id}")
     public ResponseEntity<Object> createQuestion(@PathVariable(value = "list_id") Long listId, @RequestBody Question question){
@@ -52,4 +62,18 @@ public class QuestionController {
         questionService.createQuestions(questions);
         return new ResponseEntity<>("Questions created successfully", HttpStatus.CREATED);
     } 
+
+    @GetMapping("/get/list/{list_id}")
+    public ResponseEntity<List<QuestionDTO>> getQuestionsByListId(@PathVariable(value = "list_id") Long listId){
+        List<Question> listQuestions = this.questionService.getQuestionsByListId(this.listQuestionsService.getListQuestionsById(listId));
+        List<QuestionDTO> listQuestionsDTO = listQuestions.stream().map(questionMapper::questionToQuestionDTO).collect(Collectors.toList());
+        return new ResponseEntity<>(listQuestionsDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-with-alternatives/list/{list_id}")
+    public ResponseEntity<List<QuestionDetailedDTO>> getQuestionsWithAlternativesByListId(@PathVariable(value = "list_id") Long listId){
+        List<Question> listQuestions = this.questionService.getQuestionsByListId(this.listQuestionsService.getListQuestionsById(listId));
+        List<QuestionDetailedDTO> listQuestionsDTO = listQuestions.stream().map(questionMapper::questionToQuestionDetailedDTO).collect(Collectors.toList());
+        return new ResponseEntity<>(listQuestionsDTO, HttpStatus.OK);
+    }
 }
