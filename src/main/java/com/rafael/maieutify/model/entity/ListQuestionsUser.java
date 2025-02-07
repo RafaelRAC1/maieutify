@@ -40,6 +40,11 @@ public class ListQuestionsUser {
 
     @Getter
     @Setter
+    @Column(name = "rating", nullable = true)
+    private Float rating;
+
+    @Getter
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser appUser;
