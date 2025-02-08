@@ -1,6 +1,7 @@
 package com.rafael.maieutify.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.rafael.maieutify.mapper.dto.list_questions.ListQuestionsRatingDTO;
 import com.rafael.maieutify.model.entity.AppUser;
 import com.rafael.maieutify.model.entity.Category;
 import com.rafael.maieutify.model.entity.ListQuestions;
@@ -38,5 +40,9 @@ public class ListQuestionsService {
     public Page<ListQuestions> getListsQuestionsByTitle(String title, int pageNo, int pageSize){
         PageRequest pageable = PageRequest.of(pageNo, pageSize);
         return this.listQuestionsRepository.findByTitleContaining(title, pageable);
+    }
+
+    public Optional<ListQuestionsRatingDTO> getListQuestionsRating(Long listId) {
+        return this.listQuestionsRepository.findListRatingByListId(listId);
     }
 }
