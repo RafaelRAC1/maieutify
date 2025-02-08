@@ -1,6 +1,7 @@
 package com.rafael.maieutify.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.hibernate.Hibernate;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rafael.maieutify.mapper.ListQuestionsMapper;
 import com.rafael.maieutify.mapper.dto.list_questions.ListQuestionsDTO;
 import com.rafael.maieutify.mapper.dto.list_questions.ListQuestionsDetailedDTO;
+import com.rafael.maieutify.mapper.dto.list_questions.ListQuestionsRatingDTO;
 import com.rafael.maieutify.mapper.dto.list_questions.ListQuestionsWithQuestionsDTO;
 import com.rafael.maieutify.model.entity.AppUser;
 import com.rafael.maieutify.model.entity.Category;
@@ -109,5 +111,11 @@ public class ListQuestionsController {
         List<ListQuestionsDetailedDTO> listQuestionsDetailedDTO = listQuestions.stream()
                 .map(listQuestionsMapper::listQuestionsToListQuestionsDetailedDTO).collect(Collectors.toList());
         return new ResponseEntity<>(listQuestionsDetailedDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("get-rating/{list_id}")
+    public ResponseEntity<Optional<ListQuestionsRatingDTO>> getListRatingByListId(@PathVariable(value = "list_id") Long listId) {
+        Optional<ListQuestionsRatingDTO> listQuestionsRatingDTO = this.listQuestionsService.getListQuestionsRating(listId);
+        return new ResponseEntity<>(listQuestionsRatingDTO, HttpStatus.OK);
     }
 }
