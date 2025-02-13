@@ -1,5 +1,7 @@
 package com.rafael.maieutify.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,9 @@ public class AppUserService {
 
     public AppUser getUserById(Long id) {
         return appUserRepository.findById(id).orElse(null);
+    }  
+
+    public List<AppUser> createUsers(List<AppUser> appUsers) {
+        return appUserRepository.saveAll(appUsers);
     }
 }

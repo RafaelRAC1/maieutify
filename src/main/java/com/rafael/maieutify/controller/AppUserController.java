@@ -6,6 +6,8 @@ import com.rafael.maieutify.mapper.dto.user.AppUserWithCommentsDTO;
 import com.rafael.maieutify.model.entity.AppUser;
 import com.rafael.maieutify.service.AppUserService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,12 @@ public class AppUserController {
     @PostMapping("/add")
     public AppUser createUser(@RequestBody AppUser appUser) {
         return appUserService.createUser(appUser);
+    }
+
+    @PostMapping("/addAll")
+    public ResponseEntity<Object> createUsers(@RequestBody List<AppUser> appUsers) {
+        appUserService.createUsers(appUsers);
+        return new ResponseEntity<>("Users created successfully!", HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
